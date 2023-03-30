@@ -3,17 +3,24 @@
 namespace App\Repositories;
 
 use App\Interfaces\UserRepositoryInterface;
+use App\Models\User;
 
 class UserRepository extends BaseRepository implements UserRepositoryInterface
 {
+    public function __construct(User $model)
+    {
+        $this->model = $model;
+    }
 
     public function createUser(array $userDetails)
     {
-        // TODO: Implement createUser() method.
+        return User::create($userDetails);
     }
 
-    public function updateUser(array $newDetails)
+    public function updateUser(int $id, array $newDetails)
     {
-        // TODO: Implement updateUser() method.
+        $user = $this->getById($id);
+
+        return tap($user)->update($newDetails);
     }
 }
