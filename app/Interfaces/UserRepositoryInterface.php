@@ -6,5 +6,5 @@ interface UserRepositoryInterface
 {
     public function createUser(array $userDetails);
 
-    public function updateUser(array $newDetails);
+    public function updateUser(int $id, array $newDetails);
 }
