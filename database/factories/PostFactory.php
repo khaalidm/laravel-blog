@@ -31,7 +31,6 @@ class PostFactory extends Factory
             'description'   => $this->faker->realText(120),
             'body'          => $body,
             'active'        => true,
-            'archived_at'   => null,
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now()
 
