@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('description');
             $table->text('body');
             $table->boolean('active')->default(true);
-            $table->dateTime('archived_at')->nullable();
             $table->timestamps();
         });
     }
