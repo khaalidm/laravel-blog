@@ -3,17 +3,24 @@
 namespace App\Repositories;
 
 use App\Interfaces\CategoryRepositoryInterface;
+use App\Models\Category;
 
 class CategoryRepository extends BaseRepository implements CategoryRepositoryInterface
 {
+    public function __construct(Category $model)
+    {
+        $this->model = $model;
+    }
 
     public function createCategory(array $categoryDetails)
     {
-        // TODO: Implement createCategory() method.
+        return Category::create($categoryDetails);
     }
 
-    public function updateCategory(array $newDetails)
+    public function updateCategory(int $id, array $newDetails)
     {
-        // TODO: Implement updateCategory() method.
+        $user = $this->getById($id);
+
+        return tap($user)->update($newDetails);
     }
 }

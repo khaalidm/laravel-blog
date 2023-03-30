@@ -51,7 +51,7 @@ Route::group([
             Route::get('/', 'CategoryController@index')->name('category.index');
             Route::get('{category}', 'CategoryController@show')->name('category.show');
             Route::patch('{category}', 'CategoryController@update')->name('category.update');
-            Route::delete('{category}', 'CategoryController@destroy')->name('category.destroy');
+//            Route::delete('{category}', 'CategoryController@destroy')->name('category.destroy');
             Route::post('/', 'CategoryController@store')->name('category.store');
         });
     });

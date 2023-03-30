@@ -6,5 +6,5 @@ interface CategoryRepositoryInterface
 {
     public function createCategory(array $categoryDetails);
 
-    public function updateCategory(array $newDetails);
+    public function updateCategory(int $id, array $newDetails);
 }
