@@ -3,17 +3,24 @@
 namespace App\Repositories;
 
 use App\Interfaces\CommentRepositoryInterface;
+use App\Models\Comment;
 
 class CommentRepository extends BaseRepository implements CommentRepositoryInterface
 {
+    public function __construct(Comment $model)
+    {
+        $this->model = $model;
+    }
 
     public function createComment(array $commentDetails)
     {
-        // TODO: Implement createComment() method.
+        return Comment::create($commentDetails);
     }
 
-    public function updateComment(array $newDetails)
+    public function updateComment(int $id, array $newDetails)
     {
-        // TODO: Implement updateComment() method.
+        $comment = $this->getById($id);
+
+        return tap($comment)->update($newDetails);
     }
 }
