@@ -14,7 +14,9 @@ class UserTransformer extends TransformerAbstract
      * @var array
      */
     protected array $availableIncludes = [
-        'roles'
+        'roles',
+        'posts',
+        'comments'
     ];
 
     /**
@@ -36,5 +38,15 @@ class UserTransformer extends TransformerAbstract
     public function includeRoles(User $user): Collection
     {
         return $this->collection($user->roles, new RoleTransformer());
+    }
+
+    public function includePosts(User $user): Collection
+    {
+        return $this->collection($user->posts, new PostTransformer());
+    }
+
+    public function includeComments(User $user): Collection
+    {
+        return $this->collection($user->comments, new CommentTransformer());
     }
 }
