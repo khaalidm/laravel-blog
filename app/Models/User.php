@@ -56,4 +56,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(Post::class);
     }
+
+    /**
+     * A user can have many categories
+     *
+     * @return HasMany
+     */
+    public function categories(): HasMany
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    /**
+     * A user has many comments
+     *
+     * @return HasMany
+     */
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
+    }
 }
