@@ -14,10 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//    return $request->user();
-//});
-
 Route::group([
     'prefix'     => 'v1',
     'namespace'  => '\App\Http\Controllers',
@@ -51,7 +47,6 @@ Route::group([
             Route::get('/', 'CategoryController@index')->name('category.index');
             Route::get('{category}', 'CategoryController@show')->name('category.show');
             Route::patch('{category}', 'CategoryController@update')->name('category.update');
-//            Route::delete('{category}', 'CategoryController@destroy')->name('category.destroy');
             Route::post('/', 'CategoryController@store')->name('category.store');
         });
     });
@@ -67,9 +62,10 @@ Route::group([
             Route::get('/', 'PostController@index')->name('post.index');
             Route::get('{post}', 'PostController@show')->name('post.show');
             Route::patch('{post}', 'PostController@update')->name('post.update');
-            Route::post('/toggle/active/{post}', 'PostController@archive')->name('post.toggle_active_state');
+            Route::post('/toggle/active/{post}', 'PostController@toggleActiveState')->name('post.toggle_active_state');
             Route::post('/', 'PostController@store')->name('post.store');
-            Route::delete('{user_id}', 'PostController@archive')->name('post.list_by_user');
+            Route::post('{user_id}', 'PostController@listByUser')->name('post.list_by_user');
+            Route::post('/list/{category_id}', 'PostController@listByCategory')->name('post.list_by_category');
         });
     });
 
