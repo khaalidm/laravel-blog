@@ -3,11 +3,21 @@
 namespace App\Http\Transformers;
 
 use App\Models\Post;
+use League\Fractal\Resource\Collection;
 use League\Fractal\TransformerAbstract;
 
 
 class PostTransformer extends TransformerAbstract
 {
+    /**
+     * List of resources possible to include
+     *
+     * @var array
+     */
+    protected array $availableIncludes = [
+        'comments'
+    ];
+
     public function transform(Post $post)
     {
         return [
@@ -20,9 +30,8 @@ class PostTransformer extends TransformerAbstract
         ];
     }
 
-    //TODO include comments here
-//    public function includeRoles(Post $user): Collection
-//    {
-//        return $this->collection($user->comments, new CommentTransformer());
-//    }
+    public function includeComments(Post $user): Collection
+    {
+        return $this->collection($user->comments, new CommentTransformer());
+    }
 }
