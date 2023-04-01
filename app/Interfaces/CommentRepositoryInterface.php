@@ -6,5 +6,5 @@ interface CommentRepositoryInterface
 {
     public function createComment(array $commentDetails);
 
-    public function updateComment(array $newDetails);
+    public function updateComment(int $id, array $newDetails);
 }
