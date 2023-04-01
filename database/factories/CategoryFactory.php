@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -18,6 +19,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         return [
+            'user_id'       => User::factory(),
             'name'          => fake()->text(40),
             'description'   => fake()->text(80),
             'created_at'    => Carbon::now(),

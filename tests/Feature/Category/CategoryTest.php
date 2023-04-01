@@ -44,6 +44,7 @@ class CategoryTest extends TestCase
         $this->actingAs($adminUser)
             ->json('post', route('category.store', []),
                 [
+                    'user_id'       => $adminUser->id,
                     'name'          => 'test name',
                     'description'   => 'test description'
                 ]

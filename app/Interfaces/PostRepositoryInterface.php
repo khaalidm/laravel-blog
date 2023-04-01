@@ -6,5 +6,7 @@ interface PostRepositoryInterface
 {
     public function createPost(array $postDetails);
 
-    public function updatePost(array $newDetails);
+    public function updatePost(int $id, array $newDetails);
+
+    public function toggleActiveState(int $id);
 }

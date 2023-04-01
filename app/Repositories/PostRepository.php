@@ -3,17 +3,31 @@
 namespace App\Repositories;
 
 use App\Interfaces\PostRepositoryInterface;
+use App\Models\Post;
 
 class PostRepository extends BaseRepository implements PostRepositoryInterface
 {
+    public function __construct(Post $model)
+    {
+        $this->model = $model;
+    }
 
     public function createPost(array $postDetails)
     {
-        // TODO: Implement createPost() method.
+        return Post::create($postDetails);
     }
 
-    public function updatePost(array $newDetails)
+    public function updatePost(int $id, array $newDetails)
     {
-        // TODO: Implement updatePost() method.
+        $post = $this->getById($id);
+
+        return tap($post)->update($newDetails);
+    }
+
+    public function toggleActiveState(int $id)
+    {
+        $post = $this->getById($id);
+        $post->active = !$post->active;
+        return $post->save();
     }
 }

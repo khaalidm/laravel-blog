@@ -26,6 +26,7 @@ class AddCategoryRequest extends BaseFormRequest
     public function rules()
     {
         return [
+            'user_id'       => 'required|exists:users,id',
             'name'          => 'required|string|max:160',
             'description'   => 'required|string|max:220'
         ];

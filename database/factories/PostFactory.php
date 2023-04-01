@@ -20,6 +20,7 @@ class PostFactory extends Factory
     public function definition()
     {
         $paragraphs = $this->faker->paragraphs(rand(2, 6));
+        $body = "";
         foreach ($paragraphs as $para) {
             $body .= "<p>{$para}</p>";
         }
