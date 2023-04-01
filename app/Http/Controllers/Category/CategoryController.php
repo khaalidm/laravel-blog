@@ -133,4 +133,10 @@ class CategoryController extends Controller
         $user->delete();
         return response('', Response::HTTP_NO_CONTENT);
     }
+
+    public function listCategoriesByUser(): JsonResponse
+    {
+//        TODO
+        return $this->respondNotFound();
+    }
 }
