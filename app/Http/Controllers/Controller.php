@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Domain\Objects\ErrorBag;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class Controller extends BaseController
 {
@@ -55,5 +57,27 @@ class Controller extends BaseController
     private function respondWith($data = [], $headers = []): JsonResponse
     {
         return response()->json($data, $this->getStatusCode(), $headers);
+    }
+
+
+    private function logError($e = null): static
+    {
+        $action = app('request')->route()->getAction();
+        $controller = class_basename($action['controller']);
+        [$controller, $action] = explode('@', $controller);
+
+        Log::error($controller . ' - ' . $action . ': ' . $this->getStatusCode());
+        if ($e instanceof \Throwable) {
+
+            if (!is_array($e)) {
+                Log::error('Message - ' . $e->getMessage());
+                Log::error('File - ' . $e->getFile());
+                Log::error('Line - ' . $e->getLine());
+            }
+        } else {
+            Log::error('ErrorBag', $e->getAll());
+        }
+
+        return $this;
     }
 }
