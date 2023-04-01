@@ -22,7 +22,7 @@ class CommentFactory extends Factory
         return [
             'user_id'       => User::factory(),
             'post_id'       => Post::factory(),
-            'comment'       => fake()->text(),
+            'text'          => fake()->text(),
             'created_at'    => Carbon::now(),
             'updated_at'    => Carbon::now()
         ];
