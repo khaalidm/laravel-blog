@@ -3,5 +3,6 @@
     "update users",
     "delete user",
     "add categories",
-    "update categories"
+    "update categories",
+    "list categories"
 ]
