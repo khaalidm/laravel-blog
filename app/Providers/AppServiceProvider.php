@@ -10,6 +10,9 @@ use App\Repositories\CategoryRepository;
 use App\Repositories\CommentRepository;
 use App\Repositories\PostRepository;
 use App\Repositories\UserRepository;
+use App\Strategies\Logging\ApiLoggingStrategyInterface;
+use App\Strategies\Logging\DatabaseApiLoggingStrategy;
+use App\Strategies\Logging\FileApiLoggingStrategy;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -25,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(PostRepositoryInterface::class, PostRepository::class);
         $this->app->bind(CommentRepositoryInterface::class, CommentRepository::class);
         $this->app->bind(CategoryRepositoryInterface::class, CategoryRepository::class);
+        $this->app->bind(ApiLoggingStrategyInterface::class, DatabaseApiLoggingStrategy::class);
+        $this->app->bind(ApiLoggingStrategyInterface::class, FileApiLoggingStrategy::class);
     }
 
     /**
