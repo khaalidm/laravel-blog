@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Category;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AddCategoryRequest;
 
+use App\Http\Requests\ListCategoriesByUserRequest;
 use App\Http\Requests\UpdateCategoryRequest;
 use App\Http\Serialisers\JsonSerialiser;
 use App\Http\Transformers\CategoryTransformer;
 use App\Interfaces\CategoryRepositoryInterface;
+use App\Interfaces\UserRepositoryInterface;
 use App\Models\Category;
 use Illuminate\Http\JsonResponse;
 use League\Fractal\Pagination\IlluminatePaginatorAdapter;
@@ -17,10 +19,12 @@ use Symfony\Component\HttpFoundation\Response;
 class CategoryController extends Controller
 {
     private CategoryRepositoryInterface $categoryRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(CategoryRepositoryInterface $categoryRepository)
+    public function __construct(CategoryRepositoryInterface $categoryRepository, UserRepositoryInterface $userRepository)
     {
         $this->categoryRepository = $categoryRepository;
+        $this->userRepository     = $userRepository;
     }
 
     /**
@@ -134,9 +138,24 @@ class CategoryController extends Controller
         return response('', Response::HTTP_NO_CONTENT);
     }
 
-    public function listCategoriesByUser(): JsonResponse
+    public function listCategoriesByUser(ListCategoriesByUserRequest $request, $user_id): JsonResponse
     {
-//        TODO
-        return $this->respondNotFound();
+        $request->validated();
+        try {
+            $user = $this->userRepository->getByid($user_id);
+
+            return response()
+                ->json(
+                    fractal()
+                        ->collection($user->categories)
+                        ->transformWith(CategoryTransformer::class)
+                        ->withResourceName('data')
+                        ->serializeWith(JsonSerialiser::class)
+                        ->toArray(),
+                    Response::HTTP_OK
+                );
+        } catch (\Throwable $e) {
+            return $this->respondInternalError($e);
+        }
     }
 }
