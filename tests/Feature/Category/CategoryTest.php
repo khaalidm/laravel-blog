@@ -31,8 +31,6 @@ class CategoryTest extends TestCase
             ->assertJsonCount(2);
     }
 
-//    //        //TODO get user by post
-
     /**
      * @group feature
      * @group api
@@ -139,5 +137,19 @@ class CategoryTest extends TestCase
             'name'          => 'modified name',
             'description'   => 'example description'
         ]);
+    }
+
+    public function testListCategoriesByUser(): void
+    {
+        $user = User::factory()->adminRole()->create();
+        Category::factory()->count(5)->create([
+            'user_id' => $user->id
+        ]);
+
+        $this->actingAs($user)
+            ->json('post', route('category.list_by_user', [
+                'user_id'  => $user->id
+            ]))
+            ->assertStatus(Response::HTTP_OK);
     }
 }
