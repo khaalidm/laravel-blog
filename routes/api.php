@@ -17,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::group([
     'prefix'     => 'v1',
     'namespace'  => '\App\Http\Controllers',
-    'middleware' => 'api',
+    'middleware' => [
+        'api',
+        'log.api.requests'
+    ],
 ], static function ($router) {
     // Authentication
     Route::group([
