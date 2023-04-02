@@ -130,12 +130,12 @@ class UserController extends Controller
     /**
      * @param int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy($id)
+    public function destroy($id): JsonResponse
     {
         $user = $this->userRepository->getById($id);
         $user->delete();
-        return response('', Response::HTTP_NO_CONTENT);
+        return response()->json('', Response::HTTP_NO_CONTENT);
     }
 }
