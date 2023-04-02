@@ -14,7 +14,11 @@ class LogApiRequests
 
     public function __construct(ApiLogger $logger)
     {
-        // Please note I have added the testing environment to the condition for your convenience, this will NEVER HAPPEN in a regular development environment.
+        /**
+         * Please note I have added the testing environment to the conditional for your convenience, this will NEVER HAPPEN in a regular development environment.
+         *
+         * Run `php artisan test`, this will write to a file in the `app_directory/logs` directory.
+         */
         if (env('APP_ENV') === 'local' || env('APP_ENV') === 'testing') {
             $this->logger = new ApiLogger(new FileApiLoggingStrategy());
         } else {
