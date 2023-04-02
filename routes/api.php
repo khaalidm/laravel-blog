@@ -51,6 +51,7 @@ Route::group([
             Route::get('{category}', 'CategoryController@show')->name('category.show');
             Route::patch('{category}', 'CategoryController@update')->name('category.update');
             Route::post('/', 'CategoryController@store')->name('category.store');
+            Route::post('/list-by-user/{user_id}', 'CategoryController@listCategoriesByUser')->name('category.list_by_user');
         });
     });
 
@@ -67,8 +68,8 @@ Route::group([
             Route::patch('{post}', 'PostController@update')->name('post.update');
             Route::post('/toggle/active/{post}', 'PostController@toggleActiveState')->name('post.toggle_active_state');
             Route::post('/', 'PostController@store')->name('post.store');
-            Route::post('{user_id}', 'PostController@listByUser')->name('post.list_by_user');
-            Route::post('/list/{category_id}', 'PostController@listByCategory')->name('post.list_by_category');
+            Route::post('/list-by-user/{user_id}', 'PostController@listByUser')->name('post.list_by_user');
+            Route::post('/list-by-category/{category_id}', 'PostController@listByCategory')->name('post.list_by_category');
         });
     });
 
