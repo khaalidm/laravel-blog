@@ -198,4 +198,19 @@ class PostTest extends TestCase
             ]))
             ->assertStatus(Response::HTTP_OK);
     }
+
+    public function testListPostsByCategoryWithIncorrectPrivileges(): void
+    {
+        $userBasic = User::factory()->basicUserRole()->create();
+        $category = Category::factory()->create();
+        Post::factory()->count(5)->create([
+            'category_id' => $category->id
+        ]);
+
+        $this->actingAs($userBasic)
+            ->json('post', route('post.list_by_category', [
+                'category_id'  => $category->id,
+            ]))
+            ->assertStatus(Response::HTTP_FORBIDDEN);
+    }
 }
