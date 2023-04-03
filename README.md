@@ -73,7 +73,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 ### Step 2: install dependencies 
 - run: `composer install`
 
-### Step 3: migrate and see the database
+### Step 3: migrate and seed the database
 - run: `php artisan migrate:fresh --seed`
 
 ### Step 4: run the project
