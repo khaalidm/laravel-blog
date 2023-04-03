@@ -65,16 +65,24 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
-## Blog Api
+## Blog Api Setup
 
 ### Step 1 
-- clone repo
+- clone repo: `git@github.com:khaalidm/laravel-blog.git`
+- 
 ### Step 2
-- run `composer install`
+- run: `composer install`
 
-### Tests
-- `php artisan test`
-- `./vendor/bin/phpunit`
+### Step 3
+- run: `php artisan migrate:fresh --seed`
+
+## Tests
+- run: `php artisan test`
+- or:
+- run: `./vendor/bin/phpunit`
 
 ## Documentation
 - navigate to : `http://127.0.0.1:8000/request-docs/`
+
+### Logs
+- navigate to `project_folder/logs`
