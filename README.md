@@ -67,14 +67,17 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ## Blog Api Setup
 
-### Step 1 
-- clone repo: `git@github.com:khaalidm/laravel-blog.git`
+### Step 1: clone repository
+- clone repo: `git clone git@github.com:khaalidm/laravel-blog.git`
 
-### Step 2
+### Step 2: install dependencies 
 - run: `composer install`
 
-### Step 3
+### Step 3: migrate and see the database
 - run: `php artisan migrate:fresh --seed`
+
+### Step 4: run the project
+-run : `php artisan serve`
 
 ## Tests
 - run: `php artisan test`
