@@ -69,7 +69,7 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 ### Step 1 
 - clone repo: `git@github.com:khaalidm/laravel-blog.git`
-- 
+
 ### Step 2
 - run: `composer install`
 
